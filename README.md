@@ -75,7 +75,7 @@ services:
 
 The following ssh command can be used to connect to the proxy host and open a reverse tunnel:
 ```
-ssh -N -T -R localhost:53022:localhost:22 -o ProxyCommand="openssl s_client -quiet -connect sysmote.example.com:443 -servername sysmote.example.com" sysmote
+ssh -N -T -R localhost:53022:localhost:22 -o ProxyCommand="openssl s_client -quiet -connect sysmote.example.com:443 -servername sysmote.example.com" sysmote@sysmote
 ```
 
 This can (should) be used in a setup with automatic alive checks and reconnections, such as `systemd` (note: this also requires authentication to be performed using a public/private key pair):
@@ -86,7 +86,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/ssh -vvv -N -T -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes -o -o ProxyCommand="openssl s_client -quiet -connect sysmote.example.com:443 -servername sysmote.example.com" -R localhost:53022:localhost:22 sysmote
+ExecStart=/usr/bin/ssh -vvv -N -T -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes -o -o ProxyCommand="openssl s_client -quiet -connect sysmote.example.com:443 -servername sysmote.example.com" -R localhost:53022:localhost:22 sysmote@sysmote
 Restart=always
 RestartSec=5s
 
