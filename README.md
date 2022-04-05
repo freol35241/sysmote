@@ -89,6 +89,7 @@ Type=simple
 ExecStart=/usr/bin/ssh -vvv -N -T -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes -o -o ProxyCommand="openssl s_client -quiet -connect sysmote.example.com:443 -servername sysmote.example.com" -R localhost:53022:localhost:22 sysmote@sysmote
 Restart=always
 RestartSec=5s
+RuntimeMaxSec=86400
 
 [Install]
 WantedBy=default.target
